@@ -1,0 +1,50 @@
+button {
+  background: none;
+  border: 1px solid gray;
+  border-radius: 20px;
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  outline: none;
+  padding: 20px;
+  width: 100%;
+}
+
+button:hover {
+  border-color: black;
+}
+
+button:active {
+  border-color: seagreen;
+}
+
+:host {
+  display: block;
+  outline: 3px dashed royalblue;
+  padding: 5px;
+}
+
+:host {
+  align-self: center;
+  grid-area: buy;
+}
+
+:host button {
+  background: none;
+  border: 1px solid gray;
+  border-radius: 20px;
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  outline: none;
+  padding: 20px;
+  width: 100%;
+}
+
+:host button:hover {
+  border-color: black;
+}
+
+:host button:active {
+  border-color: seagreen;
+}

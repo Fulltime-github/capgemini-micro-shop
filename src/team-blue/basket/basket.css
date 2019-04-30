@@ -1,0 +1,47 @@
+.empty,
+.filled {
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+}
+
+.empty {
+  background-color: gray;
+}
+
+.filled {
+  background-color: seagreen;
+}
+
+.title {
+  font-size: 20px;
+}
+
+:host {
+  display: block;
+  outline: 3px dashed royalblue;
+  padding: 5px;
+}
+
+
+:host {
+  align-self: baseline;
+  grid-area: basket;
+  justify-self: end;
+  margin-top: 11px;
+}
+
+:host .empty,
+:host .filled {
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+}
+
+:host .empty {
+  background-color: gray;
+}
+
+:host .filled {
+  background-color: seagreen;
+}

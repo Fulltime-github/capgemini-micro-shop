@@ -1,0 +1,42 @@
+h3 {
+  font-weight: 400;
+}
+
+img {
+  display: inline-block;
+  height: 180px;
+  width: 180px;
+}
+
+
+
+
+
+:host {
+  display: block;
+  outline: 3px dashed forestgreen;
+  width: 100%;
+}
+
+:host {
+  grid-area: reco;
+}
+
+@media only screen and (max-width: 999px) {
+  :host {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  :host {
+    justify-content: stretch;
+    text-align: center;
+    width: 100%;
+  }
+}
