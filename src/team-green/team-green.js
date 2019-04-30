@@ -30,7 +30,7 @@
       const sku = this.getAttribute('sku');
       const reco = recos[sku] || [];
       this.shadowRoot.innerHTML = `
-        <link rel="stylesheet" href="team-green/styles.css">
+        <link rel="stylesheet" href="team-green/team-green.css">
         <h3>Related Products</h3>        
         ${reco.map(id => `<img src="./team-green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
       `;

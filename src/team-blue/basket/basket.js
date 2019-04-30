@@ -30,7 +30,7 @@
     render() {
       const classname = state.count === 0 ? 'empty' : 'filled';
       this.shadowRoot.innerHTML = `
-        <link rel="stylesheet" href="team-blue/basket/styles.css">
+        <link rel="stylesheet" href="team-blue/basket/basket.css">
         
         <div class="${classname} title">
             <slot id="title" class="title" name="title"></slot> 

@@ -37,7 +37,7 @@
     render() {
       const sku = this.getAttribute('sku');
       const price = prices[sku];
-      this.shadowRoot.innerHTML = ` <link rel="stylesheet" href="team-blue/buy-button/styles.css"><button id="buy" type="button">buy for ${price}</button>`;
+      this.shadowRoot.innerHTML = ` <link rel="stylesheet" href="team-blue/buy-button/buy-button.css"><button id="buy" type="button">buy for ${price}</button>`;
     }
     attributeChangedCallback(attr, oldValue, newValue) {
       this.log('attributeChanged', attr, oldValue, newValue);
