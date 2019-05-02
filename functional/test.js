@@ -34,7 +34,7 @@ describe('Microfrontend', async function () {
         var mainImg = await driver.findElement(By.css("div#image > div > img"));
         var imageNameSmall = await imgSmall.getAttribute("alt");
         var imageNameBig = await mainImg.getAttribute("alt");
-        imageNameBig.should.equal(imageNameSmall);
+        imageNameBig.should.equals(imageNameSmall);
     });
 
 
@@ -50,7 +50,7 @@ describe('Microfrontend', async function () {
         var numberBasketItems = textBasket.substr("basket: ".length, textBasket.indexOf(" item(s)") - "basket: ".length);
 
 
-        numberBasketItems.should.equal("3");
+        numberBasketItems.should.equals("3");
     })
 });
 
