@@ -50,7 +50,7 @@ function renderPage() {
   const variant = product.variants.find(v => state.variant === v.sku);
   $app.innerHTML = `
     <h1 id="store">The Model Store</h1>
-    <cpgmni-blue-basket id="cpgmni-blue-basket"><div name="title">Slot basket: </div></cpgmni-blue-basket>
+    <cpgmni-blue-basket id="cpgmni-blue-basket"><div slot="title">Slot basket: </div></cpgmni-blue-basket>
     <div id="image"><div><img src="${variant.image}" alt="${variant.name}" /></div></div>
     <h2 id="name">${product.name} <small>${variant.name}</small></h2>
     <div id="options">${product.variants.map(renderOption).join('')}</div>

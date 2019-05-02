@@ -124,3 +124,11 @@ dd {
   padding: 15px;
 }
 
+button {
+  background-color: red;
+}
+
+cpgmni-blue-buy {
+  margin-bottom: 32px;
+  --buy-background: #8596c3;
+}

@@ -33,9 +33,8 @@
         <link rel="stylesheet" href="team-blue/basket/basket.css">
         
         <div class="${classname} title">
-            <slot id="title" class="title" name="title"></slot> 
-            <slot id="title-default" class="title">basket: </slot> 
-            ${state.count} item(s)
+            <slot class="title" name="title">Basket: </slot> 
+            <slot class="title" name="count">${state.count} item(s)</slot>
         </div>
       `;
     }

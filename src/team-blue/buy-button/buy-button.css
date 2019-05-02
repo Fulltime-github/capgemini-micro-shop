@@ -48,3 +48,9 @@ button:active {
 :host button:active {
   border-color: seagreen;
 }
+
+#buy {
+  background: var(--buy-background, #00079e);
+  border-radius: 10px;
+  padding: 10px;
+}
