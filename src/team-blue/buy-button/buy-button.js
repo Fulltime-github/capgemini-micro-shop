@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define, no-console, class-methods-use-this */
 /* globals HTMLElement, window, CustomEvent */
-(function fragments() {
+
   const prices = {
     t_porsche: '66,00 €',
     t_fendt: '54,00 €',
@@ -11,7 +11,12 @@
     count: 0,
   };
 
-  class BlueBuy extends HTMLElement {
+  export class BlueBuy extends HTMLElement {
+
+      static get tag() {
+          return "cpgmni-blue-buy";
+      }
+
     shadowRoot = this.attachShadow({mode: 'open'});
     constructor() {
       super(); // always call super() first in the constructor.
@@ -53,5 +58,6 @@
       console.log('🔘 blue-buy', ...args);
     }
   }
-  window.customElements.define('cpgmni-blue-buy', BlueBuy);
-}());
+
+  window.customElements.define(BlueBuy.tag, BlueBuy);
+

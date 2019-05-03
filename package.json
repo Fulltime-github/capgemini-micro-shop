@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "karma start",
     "test-function": "mocha --timeout 20000 functional/test.js",
     "test-unit": "jasmine --config=./jasmine.json",
     "serve": "node express-serve.js"
@@ -14,6 +15,10 @@
   "dependencies": {
     "express": "^4.16.4",
     "jasmine": "^3.4.0",
+    "karma": "^3.1.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-spec-reporter": "0.0.32",
     "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {
