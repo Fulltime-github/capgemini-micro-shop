@@ -1,17 +1,17 @@
 /* eslint-disable no-use-before-define, no-console, class-methods-use-this */
 /* globals HTMLElement, window, CustomEvent */
 
-  const prices = {
-    t_porsche: '66,00 €',
-    t_fendt: '54,00 €',
-    t_eicher: '58,00 €',
-  };
-
-  const state = {
-    count: 0,
-  };
-
   export class BlueBuy extends HTMLElement {
+    prices = {
+      t_porsche: '66,00 €',
+      t_fendt: '54,00 €',
+      t_eicher: '58,00 €',
+    };
+
+    state = {
+      count: 0,
+    };
+
 
       static get tag() {
           return "cpgmni-blue-buy";
@@ -27,13 +27,13 @@
     connectedCallback() {
       this.addToCart = this.addToCart.bind(this);
       const sku = this.getAttribute('sku');
-      this.log('asasas connected', sku);
+      BlueBuy.log('asasas connected', sku);
       this.render();
       let button = this.shadowRoot.getElementById("buy");
       button.addEventListener('click', this.addToCart);
     }
     addToCart() {
-      this.log('event sent "blue:basket:changed"');
+      BlueBuy.log('event sent "blue:basket:changed"');
       state.count += 1;
       var eventProperties = {bubbles: true, detail: { text: state.count}, composed: true};
       var event = new CustomEvent('blue:basket:changed', eventProperties);
@@ -45,16 +45,16 @@
       this.shadowRoot.innerHTML = ` <link rel="stylesheet" href="team-blue/buy-button/buy-button.css"><button id="buy" type="button">buy for ${price}</button>`;
     }
     attributeChangedCallback(attr, oldValue, newValue) {
-      this.log('attributeChanged', attr, oldValue, newValue);
+      BlueBuy.log('attributeChanged', attr, oldValue, newValue);
       this.render();
     }
     disconnectedCallback() {
       let button = this.shadowRoot.getElementById("buy");
       button.removeEventListener('click', this.addToCart);
       const sku = this.getAttribute('sku');
-      this.log('disconnected', sku);
+      BlueBuy.log('disconnected', sku);
     }
-    log(...args) {
+    static log(...args) {
       console.log('🔘 blue-buy', ...args);
     }
   }
