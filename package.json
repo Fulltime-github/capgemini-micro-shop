@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chromedriver": "latest",
     "express": "^4.16.4",
     "jasmine": "^3.4.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
