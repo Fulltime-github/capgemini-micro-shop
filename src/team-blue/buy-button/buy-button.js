@@ -27,21 +27,21 @@
     connectedCallback() {
       this.addToCart = this.addToCart.bind(this);
       const sku = this.getAttribute('sku');
-      BlueBuy.log('asasas connected', sku);
+      BlueBuy.log('connected', sku);
       this.render();
       let button = this.shadowRoot.getElementById("buy");
       button.addEventListener('click', this.addToCart);
     }
     addToCart() {
       BlueBuy.log('event sent "blue:basket:changed"');
-      state.count += 1;
-      var eventProperties = {bubbles: true, detail: { text: state.count}, composed: true};
+      this.state.count += 1;
+      var eventProperties = {bubbles: true, detail: { text: this.state.count}, composed: true};
       var event = new CustomEvent('blue:basket:changed', eventProperties);
       window.dispatchEvent(event);
     }
     render() {
       const sku = this.getAttribute('sku');
-      const price = prices[sku];
+      const price = this.prices[sku];
       this.shadowRoot.innerHTML = ` <link rel="stylesheet" href="team-blue/buy-button/buy-button.css"><button id="buy" type="button">buy for ${price}</button>`;
     }
     attributeChangedCallback(attr, oldValue, newValue) {
