@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-function": "mocha --timeout 20000 functional/test.js",
-    "test-unit": "jasmine --config=./jasmine.json",
+    "test-unit": "mocha --timeout 20000 src/team-blue/buy-button/spec --recursive",
     "serve": "node express-serve.js"
   },
   "keywords": [],
@@ -15,9 +14,9 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "chromedriver": "^2.46.0",
     "mocha": "^6.1.4",
-    "phantomjs-prebuilt": "^2.1.16",
     "showroom": "^0.9.3"
   }
 }
