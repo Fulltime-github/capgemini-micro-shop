@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start",
-    "test-function": "mocha --timeout 20000 functional/test.js",
-    "test-unit": "jasmine --config=./jasmine.json",
+    "test-unit": "karma start",
     "serve": "node express-serve.js"
   },
   "keywords": [],
