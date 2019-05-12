@@ -12,10 +12,9 @@
       count: 0,
     };
 
-
-      static get tag() {
-          return "cpgmni-blue-buy";
-      }
+    static get tag() {
+        return "cpgmni-blue-buy";
+    };
 
     shadowRoot = this.attachShadow({mode: 'open'});
     constructor() {
