@@ -3,12 +3,16 @@ import { TestUtils } from "../../../test-utils.js";
 
 describe("Basket Component", () => {
   it("clicking buy button add Elements to Basket", async () => {
-    var numberOfClicks = 3;
-    console.log(BlueBasket.tag);
-    const { shadowRoot } = await TestUtils.render(BlueBasket.tag);
-    clickOnAddToCartNumberOfTimes(numberOfClicks);
+      //ARRANGE - MOCK
+      const { shadowRoot } = await TestUtils.render(BlueBasket.tag);
+      var numberOfClicks = 3;
+      clickOnAddToCartNumberOfTimes(numberOfClicks);
+
+      //ACT
     var div = shadowRoot.querySelector("div > div");
     var basketCount = Number(div.innerText.replace(/[^0-9]/g,''));
+
+    //ASSERT
     expect(basketCount).toEqual(numberOfClicks);
   });
 
