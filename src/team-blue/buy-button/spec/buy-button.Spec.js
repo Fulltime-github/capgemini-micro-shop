@@ -19,7 +19,7 @@ describe('BuyButton Test', () => {
         .forBrowser('chrome')
         .setChromeOptions(new chrome.Options().windowSize(screen))
         .build();
-    driver.get('http://localhost/Microfrontend/src/');
+    driver.get('http://localhost:3000/');
   }, 20000);
 
   afterEach(function () {

@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test-function": "mocha --timeout 20000 functional/test.js",
-    "test-unit": "jasmine --config=./jasmine.json"
+    "test-unit": "jasmine --config=./jasmine.json",
+    "serve": "node express-serve.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.16.4",
     "jasmine": "^3.4.0",
     "selenium-webdriver": "^4.0.0-alpha.1",
     "chromedriver": "latest"
@@ -20,5 +22,3 @@
     "phantomjs-prebuilt": "^2.1.16"
   }
 }
-
-
