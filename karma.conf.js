@@ -4,7 +4,7 @@ module.exports = function(config) {
         frameworks: ["jasmine"],
         files: [
             "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js",
-            { pattern: "src/**/*.unit.js", type: "module", included: true },
+            { pattern: "src/**/*.spec.ts", type: "module", included: true },
             { pattern: "**/*.js", type: "module", included: false },
             { pattern: "node_modules/**/*.js", type: "module", included: false }
         ],
