@@ -1,3 +1,5 @@
+import {TestUtils} from "../../../test-utils";
+import {BlueBuy} from "../buy-button";
 import {BuyButtonTest} from "./buy-button-test";
 
 describe("Buy Button Component", () => {

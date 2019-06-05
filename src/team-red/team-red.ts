@@ -7,28 +7,28 @@ const product = {
   name: "Tractor",
   variants: [
     {
-      sku: "t_eicher",
       color: "blue",
-      name: "Eicher Diesel 215/16",
       image: "./team-red/images/tractor-blue.jpg",
-      thumb: "./team-red/images/tractor-blue-thumb.jpg",
+      name: "Eicher Diesel 215/16",
       price: "58,00 €",
+      sku: "t_eicher",
+      thumb: "./team-red/images/tractor-blue-thumb.jpg",
     },
     {
-      sku: "t_fendt",
       color: "green",
-      name: "Fendt F20 Dieselroß",
       image: "./team-red/images/tractor-green.jpg",
-      thumb: "./team-red/images/tractor-green-thumb.jpg",
+      name: "Fendt F20 Dieselroß",
       price: "54,00 €",
+      sku: "t_fendt",
+      thumb: "./team-red/images/tractor-green-thumb.jpg",
     },
     {
-      sku: "t_porsche",
       color: "red",
-      name: "Porsche-Diesel Master 419",
       image: "./team-red/images/tractor-red.jpg",
-      thumb: "./team-red/images/tractor-red-thumb.jpg",
+      name: "Porsche-Diesel Master 419",
       price: "66,00 €",
+      sku: "t_porsche",
+      thumb: "./team-red/images/tractor-red-thumb.jpg",
     },
   ],
 };
@@ -48,14 +48,17 @@ function renderOption(variant: any) {
 
 function renderPage() {
   const variant = product.variants.find((v) => state.variant === v.sku);
+  if ( $app == null ) {
+    return;
+  }
   $app.innerHTML = `
     <h1 id="store">The Model Store</h1>
     <cpgmni-blue-basket id="cpgmni-blue-basket"><div slot="title">Slot basket: </div></cpgmni-blue-basket>
-    <div id="image"><div><img src="${variant.image}" alt="${variant.name}" /></div></div>
-    <h2 id="name">${product.name} <small>${variant.name}</small></h2>
+    <div id="image"><div><img src="${variant ? variant.image : ""}" alt="${variant ? variant.name : ""}" /></div></div>
+    <h2 id="name">${product.name} <small>${variant ? variant.name : ""}</small></h2>
     <div id="options">${product.variants.map(renderOption).join("")}</div>
-    <cpgmni-blue-buy id="cpgmni-blue-buy" sku="${variant.sku}"></cpgmni-blue-buy>
-    <cpgmni-green-reco id="cpgmni-green-reco" sku="${variant.sku}"></cpgmni-green-reco>
+    <cpgmni-blue-buy id="cpgmni-blue-buy" sku="${variant ? variant.sku : ""}"></cpgmni-blue-buy>
+    <cpgmni-green-reco id="cpgmni-green-reco" sku="${variant ? variant.sku : ""}"></cpgmni-green-reco>
   `;
 }
 

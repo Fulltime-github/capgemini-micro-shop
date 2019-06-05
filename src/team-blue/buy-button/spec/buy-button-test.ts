@@ -1,21 +1,15 @@
-import {IComponentTest} from "./IComponentTest";
-
-const TestUtils  = require("../../../test-utils");
-
-import {jasmine} from "jasmine-core/lib/jasmine-core/example/spec";
-const BlueBuy = require("../buy-button");
+import {BlueBuy} from "../buy-button";
+import {IComponentTest} from "../../../Test/IComponentTest";
 import Spy = jasmine.Spy;
+import {TestUtils} from "../../../test-utils";
 
 export class BuyButtonTest implements IComponentTest {
 
     public numberOfClicks = 3;
     public spy: Spy = jasmine.createSpy();
 
-    constructor() {
-    }
-
     public async act() {
-        const shadowRoot = await TestUtils.render(BlueBuy.tag);
+        const { shadowRoot }: any = await TestUtils.render(BlueBuy.tag);
         const buyButton = shadowRoot.querySelector("button");
         for (let clickCount = 1; clickCount <= this.numberOfClicks; clickCount++) {
             buyButton.click();

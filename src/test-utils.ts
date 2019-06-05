@@ -7,7 +7,7 @@ export class TestUtils {
    * @param {object} attributes
    * @returns {Promise<HTMLElement>}
    */
-  static render(tag, attributes = {}) {
+  public static render(tag: any, attributes = {}) {
     TestUtils._renderToDocument(tag, attributes);
     return TestUtils._waitForComponentToRender(tag);
   }
@@ -18,7 +18,7 @@ export class TestUtils {
    * @param {string} tag
    * @param {object} attributes
    */
-  static _renderToDocument(tag, attributes) {
+  public static _renderToDocument(tag: any, attributes: any) {
     const htmlAttributes = TestUtils._mapObjectToHTMLAttributes(attributes);
     document.body.innerHTML = `<${tag} ${htmlAttributes}></${tag}>`;
   }
@@ -32,7 +32,7 @@ export class TestUtils {
    * @param {object} attributes
    * @returns {string}
    */
-  static _mapObjectToHTMLAttributes(attributes) {
+  public static _mapObjectToHTMLAttributes(attributes: any) {
     return Object.entries(attributes).reduce((previous, current) => {
       return previous + ` ${current[0]}="${current[1]}"`;
     }, "");
@@ -44,8 +44,8 @@ export class TestUtils {
    * @param {string} tag
    * @returns {Promise<HTMLElement>}
    */
-  static async _waitForComponentToRender(tag) {
-    return new Promise(resolve => {
+  public static async _waitForComponentToRender(tag: any) {
+    return new Promise((resolve: any) => {
       function requestComponent() {
         const element = document.querySelector(tag);
         if (element) {

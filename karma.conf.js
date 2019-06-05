@@ -1,22 +1,32 @@
-module.exports = function(config) {
+module.exports = (config) => {
     config.set({
-        basePath: "",
-        frameworks: ["jasmine"],
+        frameworks: [ 'jasmine', 'karma-typescript' ],
+        plugins: [
+            'karma-jasmine',
+            'karma-chrome-launcher',
+            'karma-typescript',
+            'karma-spec-reporter'
+        ],
+        karmaTypescriptConfig: {
+            tsconfig: "./tsconfig.json",
+        },
+        client: {
+            // leave Jasmine Spec Runner output visible in browser
+            clearContext: false
+        },
         files: [
             "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js",
-            { pattern: "src/**/*.spec.ts", type: "module", included: true },
-            { pattern: "**/*.js", type: "module", included: false },
-            { pattern: "node_modules/**/*.js", type: "module", included: false }
+            "node_modules/@webcomponents/custom-elements/src/native-shim.js",
+            { pattern: 'src/**/*.ts' }
         ],
-        exclude: [],
-        preprocessors: {},
-        reporters: ["spec"],
-        port: 9876,
+        preprocessors: {
+            'src/**/*.ts': [ 'karma-typescript' ]
+        },
+        reporters: [ 'spec', 'karma-typescript' ],
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ["Chrome"],
-        singleRun: true,
-        concurrency: Infinity
-    });
+        browsers: [ 'Chrome' ],
+        singleRun: true
+    })
 };
