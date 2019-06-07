@@ -5,26 +5,26 @@ import {TestUtils} from "../../../test-utils";
 export class BasketTest implements IComponentTest {
 
     private basketCount: any = 0;
-    private numberOfClicks: any = 0;
+    private numberOfClicks: any = 3;
+    private shadowRoot: any;
 
-    private static clickOnAddToCartNumberOfTimes(numberOfClicks: any) {
-        for (let clickCount = 1; clickCount <= numberOfClicks; clickCount++) {
+    private clickOnAddToCartNumberOfTimes() {
+        for (let clickCount = 1; clickCount <= this.numberOfClicks; clickCount++) {
             const eventProperties = {bubbles: true, detail: { text: clickCount}, composed: true};
             const event = new CustomEvent("blue:basket:changed", eventProperties);
-            window.dispatchEvent(event);
+            document.dispatchEvent(event);
         }
     }
 
     public async act() {
-        const { shadowRoot }: any  = await TestUtils.render(BlueBasket.tag);
-        const div = shadowRoot.querySelector( "div > div" );
+        const div = await this.shadowRoot.querySelector( "#items" );
         this.basketCount = Number(div.innerText.replace(/[^0-9]/g, ""));
-
     }
 
     public async arrange() {
-        this.numberOfClicks = 3;
-        BasketTest.clickOnAddToCartNumberOfTimes(this.numberOfClicks);
+        const { shadowRoot }: any = await TestUtils.render(BlueBasket.tag);
+        this.shadowRoot = shadowRoot;
+        this.clickOnAddToCartNumberOfTimes();
     }
 
     public assert = async () => {

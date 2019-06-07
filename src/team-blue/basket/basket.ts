@@ -12,7 +12,7 @@ export class BlueBasket extends HTMLElement {
     count: 0,
   };
 
-  public shadowRoot: any = this.attachShadow({mode: "open"});
+  public shadowRootBasket: any = this.attachShadow({mode: "open"});
   constructor() {
     super(); // always call super() first in the constructor.
   }
@@ -21,7 +21,7 @@ export class BlueBasket extends HTMLElement {
     this.refresh = this.refresh.bind(this);
     this.log("connected");
     this.render();
-    window.addEventListener("blue:basket:changed", this.refresh);
+    document.addEventListener("blue:basket:changed", this.refresh);
   }
 
   public refresh(e: any) {
@@ -32,18 +32,18 @@ export class BlueBasket extends HTMLElement {
 
   public render() {
     const classname = this.state.count === 0 ? "empty" : "filled";
-    this.shadowRoot.innerHTML = `
+    this.shadowRootBasket.innerHTML = `
 
       <link rel="stylesheet" href="team-blue/basket/basket.css">
       <div class="${classname} title">
           <slot class="title" name="title">Basket: </slot>
-          <div class="title">${this.state.count} item(s)</div>
+          <div class="title" id="items">${this.state.count} item(s)</div>
       </div>
     `;
   }
 
   public disconnectedCallback() {
-    window.removeEventListener("blue:basket:changed", this.refresh);
+    document.removeEventListener("blue:basket:changed", this.refresh);
     this.log("disconnected");
   }
 

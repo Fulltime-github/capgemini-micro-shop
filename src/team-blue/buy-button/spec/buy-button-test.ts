@@ -9,7 +9,7 @@ export class BuyButtonTest implements IComponentTest {
     public spy: Spy = jasmine.createSpy();
 
     public async act() {
-        const { shadowRoot }: any = await TestUtils.render(BlueBuy.tag);
+        const { shadowRoot }: any = await TestUtils.render(BlueBuy.tag, {"sku": "t_eicher"});
         const buyButton = shadowRoot.querySelector("button");
         for (let clickCount = 1; clickCount <= this.numberOfClicks; clickCount++) {
             buyButton.click();
@@ -17,7 +17,7 @@ export class BuyButtonTest implements IComponentTest {
     }
 
     public async arrange() {
-        window.addEventListener("blue:basket:changed", this.spy);
+        document.addEventListener("blue:basket:changed", this.spy);
     }
 
     public assert = async () => {

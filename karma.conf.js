@@ -1,4 +1,11 @@
 module.exports = (config) => {
+    //var sourcePreprocessors = 'coverage';
+    function isDebug(argument) {
+        return argument === '--debug';
+    }
+    //sourcePreprocessors = [];
+
+
     config.set({
         frameworks: [ 'jasmine', 'karma-typescript' ],
         plugins: [
@@ -20,6 +27,7 @@ module.exports = (config) => {
             { pattern: 'src/**/*.ts' }
         ],
         preprocessors: {
+           // 'index.js': sourcePreprocessors,
             'src/**/*.ts': [ 'karma-typescript' ]
         },
         reporters: [ 'spec', 'karma-typescript' ],
@@ -27,6 +35,6 @@ module.exports = (config) => {
         logLevel: config.LOG_INFO,
         autoWatch: true,
         browsers: [ 'Chrome' ],
-        singleRun: true
+        singleRun: false
     })
 };

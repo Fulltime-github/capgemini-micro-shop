@@ -7,7 +7,7 @@ export class TestUtils {
    * @param {object} attributes
    * @returns {Promise<HTMLElement>}
    */
-  public static render(tag: any, attributes = {}) {
+  public static render(tag: string, attributes = {}) {
     TestUtils._renderToDocument(tag, attributes);
     return TestUtils._waitForComponentToRender(tag);
   }
@@ -45,7 +45,7 @@ export class TestUtils {
    * @returns {Promise<HTMLElement>}
    */
   public static async _waitForComponentToRender(tag: any) {
-    return new Promise((resolve: any) => {
+    return new Promise<HTMLElement>(resolve => {
       function requestComponent() {
         const element = document.querySelector(tag);
         if (element) {
