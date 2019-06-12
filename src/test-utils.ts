@@ -45,7 +45,7 @@ export class TestUtils {
    * @returns {Promise<HTMLElement>}
    */
   public static async _waitForComponentToRender(tag: any) {
-    return new Promise<HTMLElement>(resolve => {
+    return new Promise<HTMLElement>((resolve) => {
       function requestComponent() {
         const element = document.querySelector(tag);
         if (element) {

@@ -9,9 +9,11 @@
     static get observedAttributes() {
       return ["sku"];
     }
-    static log(...args: any) {
+    public static log(...args: any) {
       console.log("🔘 blue-buy", ...args);
     }
+
+    public shadowRootBuyButton: any = this.attachShadow({mode: "open"});
     private prices: any = {
       t_eicher: "58,00 €",
       t_fendt: "54,00 €",
@@ -21,8 +23,6 @@
     private state = {
       count: 0,
     };
-
-    public shadowRootBuyButton: any = this.attachShadow({mode: "open"});
     constructor() {
       super(); // always call super() first in the constructor.
     }
@@ -32,8 +32,8 @@
       const sku = this.getAttribute("sku");
       BlueBuy.log("connected", sku);
       this.render();
-        const button = this.shadowRootBuyButton.getElementById("buy");
-        if (button != null) {
+      const button = this.shadowRootBuyButton.getElementById("buy");
+      if (button != null) {
           button.addEventListener("click", this.addToCart);
         }
     }
@@ -47,7 +47,7 @@
     public render() {
       const sku = this.getAttribute("sku");
       const price = sku != null ? this.prices[sku] : 13.15;
-        this.shadowRootBuyButton.innerHTML = ` <link rel="stylesheet" href="team-blue/buy-button/buy-button.css">
+      this.shadowRootBuyButton.innerHTML = ` <link rel="stylesheet" href="team-blue/buy-button/buy-button.css">
                                             <button id="buy" type="button">buy for ${price}</button>`;
     }
     public attributeChangedCallback(attr: any, oldValue: any, newValue: any) {
@@ -59,9 +59,9 @@
         if (button != null) {
           button.removeEventListener("click", this.addToCart);
         }
-      const sku = this.getAttribute("sku");
+        const sku = this.getAttribute("sku");
 
-      BlueBuy.log("disconnected", sku);
+        BlueBuy.log("disconnected", sku);
     }
   }
 

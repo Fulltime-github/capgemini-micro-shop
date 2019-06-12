@@ -9,7 +9,7 @@
     "node_modules"
   ],
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./dist/src",
     "sourceMap": true,
     "declaration": true,
     "noImplicitAny": true,

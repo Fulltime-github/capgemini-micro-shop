@@ -2,6 +2,12 @@
 /* globals HTMLElement, window, CustomEvent */
 
 export class BlueBasket extends HTMLElement {
+
+  static get tag() {
+    return "cpgmni-blue-basket";
+  }
+
+  public shadowRootBasket: any = this.attachShadow({mode: "open"});
   private prices = {
     t_eicher: "58,00 €",
     t_fendt: "54,00 €",
@@ -11,8 +17,6 @@ export class BlueBasket extends HTMLElement {
   private state = {
     count: 0,
   };
-
-  public shadowRootBasket: any = this.attachShadow({mode: "open"});
   constructor() {
     super(); // always call super() first in the constructor.
   }
@@ -50,10 +54,6 @@ export class BlueBasket extends HTMLElement {
   private log(...args: any) {
     // tslint:disable-next-line:no-console
     console.log("🛒 blue-basket", ...args);
-  }
-
-  static get tag() {
-    return "cpgmni-blue-basket";
   }
 }
 window.customElements.define("cpgmni-blue-basket", BlueBasket);

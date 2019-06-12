@@ -1,7 +1,7 @@
-import {BlueBuy} from "../buy-button";
-import {IComponentTest} from "../../../Test/IComponentTest";
 import Spy = jasmine.Spy;
 import {TestUtils} from "../../../test-utils";
+import {IComponentTest} from "../../../Test/IComponentTest";
+import {BlueBuy} from "../buy-button";
 
 export class BuyButtonTest implements IComponentTest {
 
@@ -9,7 +9,7 @@ export class BuyButtonTest implements IComponentTest {
     public spy: Spy = jasmine.createSpy();
 
     public async act() {
-        const { shadowRoot }: any = await TestUtils.render(BlueBuy.tag, {"sku": "t_eicher"});
+        const { shadowRoot }: any = await TestUtils.render(BlueBuy.tag, {sku: "t_eicher"});
         const buyButton = shadowRoot.querySelector("button");
         for (let clickCount = 1; clickCount <= this.numberOfClicks; clickCount++) {
             buyButton.click();
