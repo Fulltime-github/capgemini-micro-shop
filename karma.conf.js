@@ -12,7 +12,8 @@ module.exports = (config) => {
             'karma-jasmine',
             'karma-chrome-launcher',
             'karma-typescript',
-            'karma-spec-reporter'
+            'karma-spec-reporter',
+            'karma-sourcemap-loader'
         ],
         karmaTypescriptConfig: {
             tsconfig: "./tsconfig.json",
@@ -28,7 +29,7 @@ module.exports = (config) => {
         ],
         preprocessors: {
            // 'index.js': sourcePreprocessors,
-            'src/**/*.ts': [ 'karma-typescript' ]
+            'src/**/*.ts': [ 'karma-typescript', 'sourcemap' ]
         },
         reporters: [ 'spec', 'karma-typescript' ],
         colors: true,

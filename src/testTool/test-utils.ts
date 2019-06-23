@@ -1,26 +1,27 @@
+import {RenderModel} from "./render-model";
+
 export class TestUtils {
   /**
    * Renders a given element with provided attributes
    * and returns a promise which resolves as soon as
    * rendered element becomes available.
-   * @param {string} tag
-   * @param {object} attributes
    * @returns {Promise<HTMLElement>}
+   * @param renderModel:RenderModel
    */
-  public static render(tag: string, attributes = {}) {
-    TestUtils._renderToDocument(tag, attributes);
-    return TestUtils._waitForComponentToRender(tag);
+  public static render(renderModel: RenderModel) {
+    TestUtils._renderToDocument(renderModel);
+    return TestUtils._waitForComponentToRender(renderModel.tag);
   }
 
   /**
    * Replaces document's body with provided element
    * including given attributes.
-   * @param {string} tag
-   * @param {object} attributes
+   * @param renderModel:RenderModel
    */
-  public static _renderToDocument(tag: any, attributes: any) {
-    const htmlAttributes = TestUtils._mapObjectToHTMLAttributes(attributes);
-    document.body.innerHTML = `<${tag} ${htmlAttributes}></${tag}>`;
+  public static _renderToDocument(renderModel: RenderModel) {
+    const htmlAttributes = TestUtils._mapObjectToHTMLAttributes(renderModel.attributes);
+
+    document.body.innerHTML += `<${renderModel.tag} ${htmlAttributes}></${renderModel.tag}>`;
   }
 
   /**

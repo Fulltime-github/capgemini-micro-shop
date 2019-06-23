@@ -1,5 +1,6 @@
-import {TestUtils} from "../../../test-utils";
 import {IComponentTest} from "../../../Test/IComponentTest";
+import {RenderModel} from "../../../testTool/render-model";
+import {TestUtils} from "../../../testTool/test-utils";
 import {BlueBasket} from "../cpgmni-blue-basket";
 
 /**
@@ -13,14 +14,17 @@ export class CpgmniBlueBasketTest implements IComponentTest {
     private numberOfClicks: any = 3;
     private shadowRoot: any;
 
+    public async setUp() {
+        const { shadowRoot }: any = await TestUtils.render(new RenderModel(BlueBasket.tag, {}));
+        this.shadowRoot = shadowRoot;
+    }
+
     public async act() {
-        const div = await this.shadowRoot.querySelector( "#items" );
-        this.basketCount = Number(div.innerText.replace(/[^0-9]/g, ""));
+        const div = await this.shadowRoot.querySelector( "#items" ).innerHTML;
+        this.basketCount = await Number(div.innerText.replace(/[^0-9]/g, ""));
     }
 
     public async arrange() {
-        const { shadowRoot }: any = await TestUtils.render(BlueBasket.tag);
-        this.shadowRoot = shadowRoot;
         this.clickOnAddToCartNumberOfTimes();
     }
 

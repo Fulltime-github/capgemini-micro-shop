@@ -5,6 +5,9 @@ describe("Buy Button Component", () => {
   it("clicking buy button fires event", async () => {
 
     const buyButtonTest = new CpgmniBlueBuyButtonTest();
+
+    await buyButtonTest.setUp();
+
     // ARRANGE - MOCK
     await buyButtonTest.arrange();
 

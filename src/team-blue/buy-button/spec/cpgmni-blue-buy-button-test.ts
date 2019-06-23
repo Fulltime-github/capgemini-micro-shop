@@ -1,6 +1,7 @@
 import Spy = jasmine.Spy;
-import {TestUtils} from "../../../test-utils";
 import {IComponentTest} from "../../../Test/IComponentTest";
+import {RenderModel} from "../../../testTool/render-model";
+import {TestUtils} from "../../../testTool/test-utils";
 import {BlueBuy} from "../cpgmni-blue-buy-button";
 /**
  * @event=blue:basket:changed
@@ -11,10 +12,15 @@ export class CpgmniBlueBuyButtonTest implements IComponentTest {
 
     public numberOfClicks = 3;
     public spy: Spy = jasmine.createSpy();
+    private shadowRoot: any;
+
+    public async setUp() {
+        const { shadowRoot }: any = await TestUtils.render(new RenderModel(BlueBuy.tag, {sku: "t_eicher"}));
+        this.shadowRoot = shadowRoot;
+    }
 
     public async act() {
-        const { shadowRoot }: any = await TestUtils.render(BlueBuy.tag, {sku: "t_eicher"});
-        const buyButton = shadowRoot.querySelector("button");
+        const buyButton = this.shadowRoot.querySelector("button");
         for (let clickCount = 1; clickCount <= this.numberOfClicks; clickCount++) {
             buyButton.click();
         }

@@ -15,6 +15,7 @@
     "start": "node .",
     "test": "nodemon -w dist jasmine -config=jasmine.json",
     "test-unit": "npm run lint-test && karma start",
+    "test-unit-debug": "npm run lint-test && karma start --single-run=false --debug --auto-watch",
     "lint-test": "tslint --format stylish --project tsconfig.json",
     "serve": "node express-serve.js",
     "startTestGeneration": "node express-serve.js"
@@ -36,6 +37,7 @@
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^2.0.1",
+    "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "^0.0.32",
     "karma-typescript": "^4.1.0",
     "nodemon": "^1.19.1",
