@@ -57,7 +57,7 @@ function renderPage() {
     <div id="image"><div><img src="${variant ? variant.image : ""}" alt="${variant ? variant.name : ""}" /></div></div>
     <h2 id="name">${product.name} <small>${variant ? variant.name : ""}</small></h2>
     <div id="options">${product.variants.map(renderOption).join("")}</div>
-    <cpgmni-blue-buy id="cpgmni-blue-buy" sku="${variant ? variant.sku : ""}"></cpgmni-blue-buy>
+    <cpgmni-blue-buy-button id="cpgmni-blue-buy-button" sku="${variant ? variant.sku : ""}"></cpgmni-blue-buy-button>
     <cpgmni-green-reco id="cpgmni-green-reco" sku="${variant ? variant.sku : ""}"></cpgmni-green-reco>
   `;
 }

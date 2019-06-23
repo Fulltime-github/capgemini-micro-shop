@@ -21,7 +21,7 @@ describe('Microfrontend', async function () {
             .forBrowser('chrome')
             .setChromeOptions(new chrome.Options().headless().windowSize(screen))
             .build();
-        return driver.get('http://localhost/Microfrontend/')
+        return driver.get('http://localhost:8080/')
     });
 
     afterEach(function () {
@@ -40,7 +40,7 @@ describe('Microfrontend', async function () {
 
     it('validate basket Item count', async function () {
 
-        var buttonBuy = await driver.findElement(By.css("cpgmni-blue-buy > button"));
+        var buttonBuy = await driver.findElement(By.css("cpgmni-blue-buy-button > button"));
         await buttonBuy.click();
         await buttonBuy.click();
         await buttonBuy.click();

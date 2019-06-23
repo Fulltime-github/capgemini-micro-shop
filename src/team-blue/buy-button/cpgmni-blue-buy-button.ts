@@ -1,10 +1,9 @@
 /* eslint-disable no-use-before-define, no-console, class-methods-use-this */
 /* globals HTMLElement, window, CustomEvent */
-
   export class BlueBuy extends HTMLElement {
 
     static get tag() {
-        return "cpgmni-blue-buy";
+        return "cpgmni-blue-buy-button";
     }
     static get observedAttributes() {
       return ["sku"];

@@ -1,8 +1,13 @@
 import {TestUtils} from "../../../test-utils";
 import {IComponentTest} from "../../../Test/IComponentTest";
-import {BlueBasket} from "../basket";
+import {BlueBasket} from "../cpgmni-blue-basket";
 
-export class BasketTest implements IComponentTest {
+/**
+ * @event=blue:basket:changed
+ * @type=input
+ * @dataObject={text:int}
+ */
+export class CpgmniBlueBasketTest implements IComponentTest {
 
     private basketCount: any = 0;
     private numberOfClicks: any = 3;
@@ -24,7 +29,7 @@ export class BasketTest implements IComponentTest {
     }
 
     private clickOnAddToCartNumberOfTimes() {
-        for (let clickCount = 1; clickCount <= this.numberOfClicks; clickCount++) {
+        for (let clickCount: number = 1; clickCount <= this.numberOfClicks; clickCount++) {
             const eventProperties = {bubbles: true, detail: { text: clickCount}, composed: true};
             const event = new CustomEvent("blue:basket:changed", eventProperties);
             document.dispatchEvent(event);

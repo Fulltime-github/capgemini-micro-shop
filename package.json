@@ -16,14 +16,15 @@
     "test": "nodemon -w dist jasmine -config=jasmine.json",
     "test-unit": "npm run lint-test && karma start",
     "lint-test": "tslint --format stylish --project tsconfig.json",
-    "serve": "node express-serve.js"
+    "serve": "node express-serve.js",
+    "startTestGeneration": "node express-serve.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@webcomponents/custom-elements": "^1.2.4",
-    "express": "^4.16.4"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@types/express": "^4.16.1",

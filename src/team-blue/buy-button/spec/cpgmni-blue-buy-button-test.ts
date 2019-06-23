@@ -1,9 +1,13 @@
 import Spy = jasmine.Spy;
 import {TestUtils} from "../../../test-utils";
 import {IComponentTest} from "../../../Test/IComponentTest";
-import {BlueBuy} from "../buy-button";
-
-export class BuyButtonTest implements IComponentTest {
+import {BlueBuy} from "../cpgmni-blue-buy-button";
+/**
+ * @event=blue:basket:changed
+ * @type=output
+ * @dataObject={text:int}
+ */
+export class CpgmniBlueBuyButtonTest implements IComponentTest {
 
     public numberOfClicks = 3;
     public spy: Spy = jasmine.createSpy();

@@ -1,9 +1,10 @@
-import {BuyButtonTest} from "./buy-button-test";
+import {CpgmniBlueBuyButtonTest} from "./cpgmni-blue-buy-button-test";
 
 describe("Buy Button Component", () => {
+
   it("clicking buy button fires event", async () => {
 
-    const buyButtonTest = new BuyButtonTest();
+    const buyButtonTest = new CpgmniBlueBuyButtonTest();
     // ARRANGE - MOCK
     await buyButtonTest.arrange();
 
