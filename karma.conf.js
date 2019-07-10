@@ -13,7 +13,8 @@ module.exports = (config) => {
             'karma-chrome-launcher',
             'karma-typescript',
             'karma-spec-reporter',
-            'karma-sourcemap-loader'
+            'karma-sourcemap-loader',
+            'karma-coverage'
         ],
         karmaTypescriptConfig: {
             tsconfig: "./tsconfig.json",
@@ -29,13 +30,21 @@ module.exports = (config) => {
         ],
         preprocessors: {
            // 'index.js': sourcePreprocessors,
-            'src/**/*.ts': [ 'karma-typescript', 'sourcemap' ]
+            'src/**/*.ts': [ 'karma-typescript', 'sourcemap', 'coverage']
         },
         reporters: [ 'spec', 'karma-typescript' ],
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: [ 'Chrome' ],
-        singleRun: false
+        browsers: [ 'ChromeHeadless' ],
+        singleRun: false,
+        coverageReporter: {
+            includeAllSources: true,
+            dir: 'coverage/',
+            reporters: [
+                { type: "html", subdir: "html" },
+                { type: 'text-summary' }
+            ]
+        }
     })
 };
