@@ -52,8 +52,8 @@ function renderPage() {
     return;
   }
   $app.innerHTML = `
-    <h1 id="store">The Model Store</h1>
-    <cpgmni-blue-basket id="cpgmni-blue-basket"><div slot="title">Slot basket: </div></cpgmni-blue-basket>
+    <h1 id="store">Capgemini-Micro-Shop</h1>
+    <cpgmni-blue-basket id="cpgmni-blue-basket"><div slot="title">basket: </div></cpgmni-blue-basket>
     <div id="image"><div><img src="${variant ? variant.image : ""}" alt="${variant ? variant.name : ""}" /></div></div>
     <h2 id="name">${product.name} <small>${variant ? variant.name : ""}</small></h2>
     <div id="options">${product.variants.map(renderOption).join("")}</div>

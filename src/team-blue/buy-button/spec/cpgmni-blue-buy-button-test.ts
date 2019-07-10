@@ -10,7 +10,6 @@ import {BlueBuy} from "../cpgmni-blue-buy-button";
  */
 export class CpgmniBlueBuyButtonTest implements IComponentTest {
 
-    public numberOfClicks = 3;
     public spy: Spy = jasmine.createSpy();
     private shadowRoot: any;
 
@@ -21,9 +20,7 @@ export class CpgmniBlueBuyButtonTest implements IComponentTest {
 
     public async act() {
         const buyButton = this.shadowRoot.querySelector("button");
-        for (let clickCount = 1; clickCount <= this.numberOfClicks; clickCount++) {
-            buyButton.click();
-        }
+        buyButton.click();
     }
 
     public async arrange() {
@@ -31,6 +28,6 @@ export class CpgmniBlueBuyButtonTest implements IComponentTest {
     }
 
     public assert = async () => {
-        expect(this.spy.calls.count()).toEqual(this.numberOfClicks);
+        expect(this.spy.calls.count()).toEqual(1);
     }
 }

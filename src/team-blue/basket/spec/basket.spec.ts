@@ -6,10 +6,12 @@ describe("Basket Component", () => {
       // ARRANGE - SETUP
      await basketTest.setUp();
       // ARRANGE - MOCK
-     await basketTest.arrange();
-    // ACT
-     await basketTest.act();
-    // ASSERT
-     await basketTest.assert();
+     basketTest.arrange().then(() => {
+         // ACT
+         basketTest.act().then(() => {
+             // ASSERT
+             basketTest.assert();
+         });
+     });
   }) ;
 });

@@ -39,7 +39,7 @@
     public addToCart() {
       BlueBuy.log('event sent "blue:basket:changed"');
       this.state.count += 1;
-      const eventProperties = {bubbles: true, detail: { text: this.state.count}, composed: true};
+      const eventProperties = {bubbles: true, detail: { count: this.state.count, sku: this.getAttribute("sku")}, composed: true};
       const event = new CustomEvent("blue:basket:changed", eventProperties);
       document.dispatchEvent(event);
     }

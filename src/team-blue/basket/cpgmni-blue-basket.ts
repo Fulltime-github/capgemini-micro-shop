@@ -14,6 +14,8 @@ export class BlueBasket extends HTMLElement {
     t_porsche: "66,00 €",
   };
 
+  private sku = null;
+
   private state = {
     count: 0,
   };
@@ -30,7 +32,8 @@ export class BlueBasket extends HTMLElement {
 
   public refresh(e: any) {
     this.log('event recieved "blue:basket:changed"');
-    this.state.count = e.detail.text;
+    this.state.count = e.detail.count;
+    this.sku = e.detail.sku;
     this.render();
   }
 
@@ -41,7 +44,7 @@ export class BlueBasket extends HTMLElement {
       <link rel="stylesheet" href="team-blue/basket/basket.css">
       <div class="${classname} title">
           <slot class="title" name="title">Basket: </slot>
-          <div class="title" id="items">${this.state.count} item(s)</div>
+          <div class="title" id="items">${this.state.count} item(s) ${this.sku ? "of " + this.sku : ""}</div>
       </div>
     `;
   }
