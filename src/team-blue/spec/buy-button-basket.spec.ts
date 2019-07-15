@@ -7,10 +7,9 @@ describe("Basket Component", () => {
         const buyButtonTest = new CpgmniBlueBuyButtonTest();
         await basketTest.setUp();
         await buyButtonTest.setUp();
-        await buyButtonTest.arrange();
-        buyButtonTest.act().then(() => {
-            basketTest.act().then(() => {
-                basketTest.assert();
+        return buyButtonTest.act().then(() => {
+            return basketTest.act().then(() => {
+               return basketTest.assert();
             });
         });
     });

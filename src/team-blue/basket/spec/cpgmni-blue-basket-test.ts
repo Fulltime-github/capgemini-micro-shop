@@ -2,7 +2,6 @@ import {IComponentTest} from "../../../Test/IComponentTest";
 import {RenderModel} from "../../../testTool/render-model";
 import {TestUtils} from "../../../testTool/test-utils";
 import {BlueBasket} from "../cpgmni-blue-basket";
-
 /**
  * @event=blue:basket:changed
  * @type=input
@@ -11,32 +10,29 @@ import {BlueBasket} from "../cpgmni-blue-basket";
 export class CpgmniBlueBasketTest implements IComponentTest {
 
     private basketCount: any = 0;
-    private numberOfClicks: any = 3;
-    private shadowRoot: any;
+    private numberOfButtonClicks: any = 1;
+    private sku: any = 't_eicher';
 
     public async setUp() {
-        const { shadowRoot }: any = await TestUtils.render(new RenderModel(BlueBasket.tag, {}));
-        this.shadowRoot = shadowRoot;
+        let basketModel = new RenderModel(BlueBasket.tag, {});
+        await TestUtils.addRender(basketModel);
     }
 
     public async act() {
-        const div = await this.shadowRoot.querySelector( "#items" ).innerHTML;
-        this.basketCount = await Number(div.innerText.replace(/[^0-9]/g, ""));
+        const basket:any = await TestUtils.getComponent(BlueBasket.tag);
+        const div = await basket.shadowRoot.querySelector( "#items" ).innerHTML;
+        this.basketCount = await Number(div.replace(/[^0-9]/g, ""));
     }
 
     public async arrange() {
-        this.clickOnAddToCartNumberOfTimes();
+        const eventProperties = {bubbles: true, detail:
+                                {count: this.numberOfButtonClicks, sku: this.sku}
+                                ,composed: true};
+        const event = new CustomEvent("blue:basket:changed", eventProperties);
+        document.dispatchEvent(event);
     }
 
     public assert = async () => {
-        expect(this.basketCount).toEqual(this.numberOfClicks);
-    }
-
-    private clickOnAddToCartNumberOfTimes() {
-        for (let clickCount: number = 1; clickCount <= this.numberOfClicks; clickCount++) {
-            const eventProperties = {bubbles: true, detail: { text: clickCount}, composed: true};
-            const event = new CustomEvent("blue:basket:changed", eventProperties);
-            document.dispatchEvent(event);
-        }
-    }
+        expect(this.basketCount).toEqual(this.numberOfButtonClicks);
+    };
 }

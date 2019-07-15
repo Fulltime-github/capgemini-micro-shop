@@ -11,16 +11,16 @@ import {BlueBuy} from "../cpgmni-blue-buy-button";
 export class CpgmniBlueBuyButtonTest implements IComponentTest {
 
     public spy: Spy = jasmine.createSpy();
-    private shadowRoot: any;
 
     public async setUp() {
-        const { shadowRoot }: any = await TestUtils.render(new RenderModel(BlueBuy.tag, {sku: "t_eicher"}));
-        this.shadowRoot = shadowRoot;
+        let buyButtonModel = new RenderModel(BlueBuy.tag, {sku: "t_eicher"});
+        await TestUtils.addRender(buyButtonModel);
     }
 
     public async act() {
-        const buyButton = this.shadowRoot.querySelector("button");
-        buyButton.click();
+        const buyButton:any = await TestUtils.getComponent(BlueBuy.tag);
+        const buyButtonButton = buyButton.shadowRoot.querySelector( "button" );
+        await buyButtonButton.click();
     }
 
     public async arrange() {

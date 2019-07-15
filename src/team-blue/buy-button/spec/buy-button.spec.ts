@@ -1,20 +1,31 @@
-import {CpgmniBlueBuyButtonTest} from "./cpgmni-blue-buy-button-test";
+import Spy = jasmine.Spy;
+import {TestUtils} from "../../../testTool/test-utils";
+import {RenderModel} from "../../../testTool/render-model";
+import {BlueBuy} from "../cpgmni-blue-buy-button";
 
-describe("Buy Button Component", () => {
+describe("Buy-Button Event Test", () => {
 
-  it("clicking buy button fires event", async () => {
+    beforeEach(async () => {
+        let buyButtonModel = new RenderModel(BlueBuy.tag, {sku: "t_eicher"});
+        await TestUtils.render(buyButtonModel);
+    });
 
-    const buyButtonTest = new CpgmniBlueBuyButtonTest();
+    afterEach(async () => {
+        TestUtils.close();
+    });
 
-    await buyButtonTest.setUp();
+    it("clicking buy button fires event", async () => {
 
-    // ARRANGE - MOCK
-    await buyButtonTest.arrange();
+        // ARRANGE - MOCK
+        const spy: Spy = jasmine.createSpy();
+        document.addEventListener("blue:basket:changed", spy);
 
-    // ACT
-    await buyButtonTest.act();
+        // ACT
+        const buyButton:any = await TestUtils.getComponent(BlueBuy.tag);
+        const buyButtonButton = buyButton.shadowRoot.querySelector("button");
+        buyButtonButton.click();
 
-    // ASSERT
-    await buyButtonTest.assert();
-  });
+        // ASSERT
+        expect(spy.calls.count()).toEqual(1);
+    });
 });
