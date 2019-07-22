@@ -14,10 +14,9 @@ export class BlueBasket extends HTMLElement {
     t_porsche: "66,00 €",
   };
 
-  private sku = null;
-
-  private state = {
+  private state: {count: number, sku: string} = {
     count: 0,
+    sku: "",
   };
   constructor() {
     super(); // always call super() first in the constructor.
@@ -30,11 +29,19 @@ export class BlueBasket extends HTMLElement {
     document.addEventListener("blue:basket:changed", this.refresh);
   }
 
-  public refresh(e: any) {
+  public refresh(e: CustomEvent) {
     this.log('event recieved "blue:basket:changed"');
-    this.state.count = e.detail.count;
-    this.sku = e.detail.sku;
+    console.log("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
+    console.log(e.detail);
+
+    this.state = e.detail;
     this.render();
+  }
+
+  public updateState(data: { count: number, sku: string}) {
+    console.log("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
+    console.log(data);
+    this.state = data;
   }
 
   public render() {
@@ -44,7 +51,7 @@ export class BlueBasket extends HTMLElement {
       <link rel="stylesheet" href="team-blue/basket/basket.css">
       <div class="${classname} title">
           <slot class="title" name="title">Basket: </slot>
-          <div class="title" id="items">${this.state.count} item(s) ${this.sku ? "of " + this.sku : ""}</div>
+          <div class="title" id="items">${this.state.count} item(s) ${this.state.sku ? "of " + this.state.sku : ""}</div>
       </div>
     `;
   }

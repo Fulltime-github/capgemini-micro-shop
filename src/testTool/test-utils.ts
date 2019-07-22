@@ -30,6 +30,19 @@ export class TestUtils {
   }
 
   /**
+   * Renders a given element with provided attributes
+   * and returns a promise which resolves as soon as
+   * rendered element becomes available.
+   * @returns {Promise<HTMLElement>}
+   * @param htmlCode
+   * @param tag
+   */
+  public static addRenderHtml(htmlCode: string, tag: string) {
+    TestUtils._renderAddHtmlCodeToDocument(htmlCode);
+    return TestUtils._waitForComponentToRender(tag);
+  }
+
+  /**
    * Replaces document's body with provided element
    * including given attributes.
    * @param renderModel:RenderModel
@@ -47,6 +60,15 @@ export class TestUtils {
   public static _renderAddToDocument(renderModel: RenderModel) {
     const htmlAttributes = TestUtils._mapObjectToHTMLAttributes(renderModel.attributes);
     document.body.innerHTML += `<${renderModel.tag} ${htmlAttributes}></${renderModel.tag}>`;
+  }
+
+  /**
+   * Replaces document's body with provided element
+   * including given attributes.
+   * @param htmlCode
+   */
+  public static _renderAddHtmlCodeToDocument(htmlCode: string) {
+    document.body.innerHTML += htmlCode;
   }
 
   /**
@@ -97,7 +119,7 @@ export class TestUtils {
         if (element) {
           resolve(element);
         } else {
-          window.requestAnimationFrame(requestComponent);
+          throw new Error();
         }
       }
       requestComponent();

@@ -1,9 +1,11 @@
 export interface IComponentTest {
-    setUp(): any;
+    setup(): any;
 
     arrange(): any;
 
     act(): any;
 
     assert(): any;
+
+    teardown(): any;
 }

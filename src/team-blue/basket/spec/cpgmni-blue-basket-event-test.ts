@@ -7,32 +7,39 @@ import {BlueBasket} from "../cpgmni-blue-basket";
  * @type=input
  * @dataObject={text:int}
  */
-export class CpgmniBlueBasketTest implements IComponentTest {
+export class CpgmniBlueBasketEventTest implements IComponentTest {
 
     private basketCount: any = 0;
     private numberOfButtonClicks: any = 1;
-    private sku: any = 't_eicher';
+    private sku: any = "t_eicher";
+    private basket: any;
 
-    public async setUp() {
-        let basketModel = new RenderModel(BlueBasket.tag, {});
+    public async setup() {
+        const basketModel = new RenderModel(BlueBasket.tag, {});
         await TestUtils.addRender(basketModel);
     }
 
     public async act() {
-        const basket:any = await TestUtils.getComponent(BlueBasket.tag);
-        const div = await basket.shadowRoot.querySelector( "#items" ).innerHTML;
-        this.basketCount = await Number(div.replace(/[^0-9]/g, ""));
-    }
-
-    public async arrange() {
         const eventProperties = {bubbles: true, detail:
-                                {count: this.numberOfButtonClicks, sku: this.sku}
-                                ,composed: true};
+                {count: this.numberOfButtonClicks, sku: this.sku}
+            , composed: true};
         const event = new CustomEvent("blue:basket:changed", eventProperties);
         document.dispatchEvent(event);
     }
 
+    public async arrange() {
+        this.basket = await TestUtils.getComponent(BlueBasket.tag);
+    }
+
     public assert = async () => {
+        const basket: any = await TestUtils.getComponent(BlueBasket.tag);
+        const div = await basket.shadowRoot.querySelector( "#items" ).innerHTML;
+        this.basketCount = await Number(div.replace(/[^0-9]/g, ""));
+
         expect(this.basketCount).toEqual(this.numberOfButtonClicks);
-    };
+    }
+
+    public teardown() {
+        TestUtils.close();
+    }
 }

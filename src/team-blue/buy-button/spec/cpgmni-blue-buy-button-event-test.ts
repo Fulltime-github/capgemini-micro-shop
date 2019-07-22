@@ -8,19 +8,23 @@ import {BlueBuy} from "../cpgmni-blue-buy-button";
  * @type=output
  * @dataObject={text:int}
  */
-export class CpgmniBlueBuyButtonTest implements IComponentTest {
+export class CpgmniBlueBuyButtonEventTest implements IComponentTest {
 
     public spy: Spy = jasmine.createSpy();
 
-    public async setUp() {
-        let buyButtonModel = new RenderModel(BlueBuy.tag, {sku: "t_eicher"});
+    public async setup() {
+        const buyButtonModel = new RenderModel(BlueBuy.tag, {sku: "t_eicher"});
         await TestUtils.addRender(buyButtonModel);
     }
 
     public async act() {
-        const buyButton:any = await TestUtils.getComponent(BlueBuy.tag);
-        const buyButtonButton = buyButton.shadowRoot.querySelector( "button" );
+        const buyButton: any = await TestUtils.getComponent(BlueBuy.tag);
+        const buyButton2 = await document.querySelector(BlueBuy.tag);
+                // @ts-ignore
+        const buyButtonButton = buyButton2.shadowRoot.querySelector("button");
+                // @ts-ignore
         await buyButtonButton.click();
+
     }
 
     public async arrange() {
@@ -29,5 +33,9 @@ export class CpgmniBlueBuyButtonTest implements IComponentTest {
 
     public assert = async () => {
         expect(this.spy.calls.count()).toEqual(1);
+    }
+
+    public teardown() {
+        TestUtils.close();
     }
 }
