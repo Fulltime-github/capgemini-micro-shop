@@ -8,15 +8,12 @@ export class BlueBasket extends HTMLElement {
   }
 
   public shadowRootBasket: any = this.attachShadow({mode: "open"});
-  private prices = {
-    t_eicher: "58,00 €",
-    t_fendt: "54,00 €",
-    t_porsche: "66,00 €",
-  };
 
-  private state: {count: number, sku: string} = {
+  private state: {count: number, sku: string, basketPrice: any, currency: string} = {
     count: 0,
     sku: "",
+    basketPrice: 0,
+    currency: ""
   };
   constructor() {
     super(); // always call super() first in the constructor.
@@ -31,17 +28,18 @@ export class BlueBasket extends HTMLElement {
 
   public refresh(e: CustomEvent) {
     this.log('event recieved "blue:basket:changed"');
-    console.log("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
-    console.log(e.detail);
-
-    this.state = e.detail;
+    this.updateState(e.detail);
     this.render();
+
   }
 
-  public updateState(data: { count: number, sku: string}) {
-    console.log("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§");
-    console.log(data);
-    this.state = data;
+  public updateState(eventData: {sku: string, priceDetail: {price: number, currency: string}}) {
+    this.state.count += 1;
+    console.log("eventData");
+    console.log(eventData);
+    this.state.basketPrice += eventData.priceDetail.price;
+    this.state.currency = eventData.priceDetail.currency;
+    this.state.sku = eventData.sku;
   }
 
   public render() {
@@ -51,7 +49,12 @@ export class BlueBasket extends HTMLElement {
       <link rel="stylesheet" href="team-blue/basket/basket.css">
       <div class="${classname} title">
           <slot class="title" name="title">Basket: </slot>
-          <div class="title" id="items">${this.state.count} item(s) ${this.state.sku ? "of " + this.state.sku : ""}</div>
+          <div class="title" id="items">
+            ${this.state.count} item(s) ${this.state.sku ? "of " + this.state.sku : ""}
+          </div>
+          <div class="title">
+            Price: ${this.state.basketPrice.toFixed(2) + " " + this.state.currency}
+          </div>
       </div>
     `;
   }

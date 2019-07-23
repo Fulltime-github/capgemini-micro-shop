@@ -24,7 +24,6 @@ describe("Buy-Button Event Test", () => {
         const buyButton: any = await TestUtils.getComponent(BlueBuy.tag);
         const buyButtonButton = buyButton.shadowRoot.querySelector("button");
         buyButtonButton.click();
-
         // ASSERT
         expect(spy.calls.count()).toEqual(1);
     });

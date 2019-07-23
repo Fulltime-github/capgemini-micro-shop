@@ -13,23 +13,21 @@
     }
 
     public shadowRootBuyButton: any = this.attachShadow({mode: "open"});
-    private prices: any = {
-      t_eicher: "58,00 €",
-      t_fendt: "54,00 €",
-      t_porsche: "66,00 €",
+    private sku: any;
+    private products: any = {
+      t_eicher: {price: 57.99, currency: "EUR"},
+      t_fendt: {price: 54.99, currency: "EUR"},
+      t_porsche: {price: 66.99, currency: "EUR"},
     };
 
-    private state = {
-      count: 0,
-    };
     constructor() {
       super(); // always call super() first in the constructor.
     }
 
     public connectedCallback() {
       this.addToCart = this.addToCart.bind(this);
-      const sku = this.getAttribute("sku");
-      BlueBuy.log("connected", sku);
+      this.sku = this.getAttribute("sku");
+      BlueBuy.log("connected", this.sku);
       this.render();
       const button = this.shadowRootBuyButton.getElementById("buy");
       if (button != null) {
@@ -38,19 +36,22 @@
     }
     public addToCart() {
       BlueBuy.log('event sent "blue:basket:changed"');
-      this.state.count += 1;
-      const eventProperties = {bubbles: true, detail: { count: "this.state.count", sku: this.getAttribute("sku")}, composed: true};
-      const event = new CustomEvent("blue:basket:changed", eventProperties);
-      document.dispatchEvent(event);
+      const sku = this.sku;
+      if (sku != null) {
+        const eventProperties = {bubbles: true, detail: {sku, priceDetail: this.products[sku]}, composed: true};
+        const event = new CustomEvent("blue:basket:changed", eventProperties);
+        document.dispatchEvent(event);
+      }
     }
     public render() {
-      const sku = this.getAttribute("sku");
-      const price = sku != null ? this.prices[sku] : 13.15;
+      const sku = this.sku;
+      const price = this.products[sku].price + " " + this.products[this.sku].currency;
       this.shadowRootBuyButton.innerHTML = ` <link rel="stylesheet" href="team-blue/buy-button/buy-button.css">
                                             <button id="buy" type="button">buy for ${price}</button>`;
     }
     public attributeChangedCallback(attr: any, oldValue: any, newValue: any) {
       BlueBuy.log("attributeChanged", attr, oldValue, newValue);
+      this.sku = this.getAttribute("sku");
       this.render();
     }
     public disconnectedCallback() {
@@ -58,9 +59,9 @@
         if (button != null) {
           button.removeEventListener("click", this.addToCart);
         }
-        const sku = this.getAttribute("sku");
+        this.sku = this.getAttribute("sku");
 
-        BlueBuy.log("disconnected", sku);
+        BlueBuy.log("disconnected", this.sku);
     }
   }
 

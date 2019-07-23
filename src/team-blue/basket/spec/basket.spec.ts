@@ -21,7 +21,8 @@ describe("Basket Component", () => {
         const basket: any = await TestUtils.getComponent(BlueBasket.tag);
 
         // ACT
-        const eventProperties = {bubbles: true, detail: { count: numberOfClicks, sku}, composed: true};
+        const eventProperties = {bubbles: true, detail:
+                {sku: "t_eicher", priceDetail: {price: 57.99, currency: "EUR"}}, composed: true};
         const event = new CustomEvent("blue:basket:changed", eventProperties);
         await document.dispatchEvent(event);
 

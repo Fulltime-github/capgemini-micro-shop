@@ -9,7 +9,9 @@ describe("Basket Component", () => {
         await buyButtonTest.setup();
         return buyButtonTest.act().then(() => {
             return basketTest.act().then(() => {
-               return basketTest.assert();
+               return basketTest.assert().then(() => {
+                   basketTest.teardown();
+               });
             });
         });
     });

@@ -20,15 +20,15 @@ export class CpgmniBlueBasketEventTest implements IComponentTest {
     }
 
     public async act() {
-        const eventProperties = {bubbles: true, detail:
-                {count: this.numberOfButtonClicks, sku: this.sku}
-            , composed: true};
-        const event = new CustomEvent("blue:basket:changed", eventProperties);
-        document.dispatchEvent(event);
     }
 
     public async arrange() {
         this.basket = await TestUtils.getComponent(BlueBasket.tag);
+        const eventProperties = {bubbles: true, detail:
+                {sku: "t_eicher", priceDetail: {price: 57.99, currency: "EUR"}}
+            , composed: true};
+        const event = new CustomEvent("blue:basket:changed", eventProperties);
+        document.dispatchEvent(event);
     }
 
     public assert = async () => {
