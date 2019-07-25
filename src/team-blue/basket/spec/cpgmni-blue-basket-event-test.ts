@@ -11,8 +11,6 @@ export class CpgmniBlueBasketEventTest implements IComponentTest {
 
     private basketCount: any = 0;
     private numberOfButtonClicks: any = 1;
-    private sku: any = "t_eicher";
-    private basket: any;
 
     public async setup() {
         const basketModel = new RenderModel(BlueBasket.tag, {});
@@ -23,7 +21,6 @@ export class CpgmniBlueBasketEventTest implements IComponentTest {
     }
 
     public async arrange() {
-        this.basket = await TestUtils.getComponent(BlueBasket.tag);
         const eventProperties = {bubbles: true, detail:
                 {sku: "t_eicher", priceDetail: {price: 57.99, currency: "EUR"}}
             , composed: true};
@@ -31,7 +28,7 @@ export class CpgmniBlueBasketEventTest implements IComponentTest {
         document.dispatchEvent(event);
     }
 
-    public assert = async () => {
+    public async assert()  {
         const basket: any = await TestUtils.getComponent(BlueBasket.tag);
         const div = await basket.shadowRoot.querySelector( "#items" ).innerHTML;
         this.basketCount = await Number(div.replace(/[^0-9]/g, ""));

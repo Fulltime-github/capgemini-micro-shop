@@ -2,27 +2,21 @@
 /* globals HTMLElement, window, CustomEvent */
   export class BlueBuy extends HTMLElement {
 
-    static get tag() {
-        return "cpgmni-blue-buy-button";
-    }
-    static get observedAttributes() {
-      return ["sku"];
-    }
+    static get tag() {return "cpgmni-blue-buy-button"; }
+    static get observedAttributes() { return ["sku"]; }
+
     public static log(...args: any) {
       console.log("🔘 blue-buy", ...args);
     }
-
     public shadowRootBuyButton: any = this.attachShadow({mode: "open"});
     private sku: any;
+
     private products: any = {
       t_eicher: {price: 57.99, currency: "EUR"},
       t_fendt: {price: 54.99, currency: "EUR"},
       t_porsche: {price: 66.99, currency: "EUR"},
     };
-
-    constructor() {
-      super(); // always call super() first in the constructor.
-    }
+    constructor() { super(); }
 
     public connectedCallback() {
       this.addToCart = this.addToCart.bind(this);
